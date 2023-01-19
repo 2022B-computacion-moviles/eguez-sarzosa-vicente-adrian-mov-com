@@ -3,6 +3,7 @@ package com.example.movcompvaes
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.EditText
 
 class ECrudEntrenador : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
