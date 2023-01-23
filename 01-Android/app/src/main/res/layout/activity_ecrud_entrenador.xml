@@ -7,18 +7,18 @@
     tools:context=".ECrudEntrenador">
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btn_actualizar_bdd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="Editar"
-        app:layout_constraintEnd_toEndOf="@+id/button3"
+        app:layout_constraintEnd_toEndOf="@+id/btn_crear_bdd"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/button3"
-        app:layout_constraintTop_toBottomOf="@+id/button3" />
+        app:layout_constraintStart_toStartOf="@+id/btn_crear_bdd"
+        app:layout_constraintTop_toBottomOf="@+id/btn_crear_bdd" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btn_buscar_bdd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -29,15 +29,15 @@
         app:layout_constraintTop_toBottomOf="@+id/input_descripcion" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/btn_crear_bdd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Crear"
-        app:layout_constraintEnd_toEndOf="@+id/button2"
+        app:layout_constraintEnd_toEndOf="@+id/btn_buscar_bdd"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/button2"
-        app:layout_constraintTop_toBottomOf="@+id/button2" />
+        app:layout_constraintStart_toStartOf="@+id/btn_buscar_bdd"
+        app:layout_constraintTop_toBottomOf="@+id/btn_buscar_bdd" />
 
     <TextView
         android:id="@+id/textView3"
@@ -113,13 +113,13 @@
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/btn_eliminar_bdd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="Eliminar"
-        app:layout_constraintEnd_toEndOf="@+id/button"
+        app:layout_constraintEnd_toEndOf="@+id/btn_actualizar_bdd"
         app:layout_constraintHorizontal_bias="0.666"
-        app:layout_constraintStart_toStartOf="@+id/button"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintStart_toStartOf="@+id/btn_actualizar_bdd"
+        app:layout_constraintTop_toBottomOf="@+id/btn_actualizar_bdd" />
 </androidx.constraintlayout.widget.ConstraintLayout>
