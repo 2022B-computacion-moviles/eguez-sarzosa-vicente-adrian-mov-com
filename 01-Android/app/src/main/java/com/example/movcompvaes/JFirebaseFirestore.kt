@@ -47,7 +47,46 @@ class JFirebaseFirestore : AppCompatActivity() {
         botonObtenerDocumento.setOnClickListener {
             consultarDocumento(adaptador)
         }
+
+        val botonFirebaseIndiceCompuesto = findViewById<Button>(R.id.btn_fs_ind_comp)
+        botonFirebaseIndiceCompuesto.setOnClickListener { consultaIndiceCompuesto(adaptador) }
+
+        val botonFirebaseEliminar = findViewById<Button>(R.id.btn_fs_eliminar)
+        botonFirebaseEliminar.setOnClickListener { eliminarRegistro() }
     }
+
+    fun eliminarRegistro(){
+        val db = Firebase.firestore
+        val referenciaEjemploEstudiante = db
+            .collection("ejemplo")
+            .document("123456789")
+            .collection("estudiante")
+
+        referenciaEjemploEstudiante
+            .document("123456789")
+            .delete() // elimina
+            .addOnCompleteListener { /* Si todo salio bien*/ }
+            .addOnFailureListener { /* Si algo salio mal*/ }
+    }
+    fun consultaIndiceCompuesto(
+        adaptador: ArrayAdapter<JCitiesDto>
+    ){
+        val db = Firebase.firestore
+        val citiesRefUnico = db
+            .collection("cities")
+        citiesRefUnico
+            .whereEqualTo("capital", false)
+            .whereLessThanOrEqualTo("population", 4000000)
+            .orderBy("population", Query.Direction.DESCENDING)
+            .get()
+            .addOnSuccessListener {
+                for (ciudad in it) {
+                    anadirAArregloCiudad(arreglo, ciudad, adaptador)
+                }
+            }
+    }
+
+
 
 
     fun consultarDocumento(
