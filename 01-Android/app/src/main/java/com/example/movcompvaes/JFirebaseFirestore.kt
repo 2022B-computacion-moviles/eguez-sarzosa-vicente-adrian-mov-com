@@ -56,8 +56,6 @@ class JFirebaseFirestore : AppCompatActivity() {
             ),
             "materias" to listOf("web", "moviles")
         )
-
-
         // Con identificador quemado
         referenciaEjemploEstudiante
             .document("123456789")
