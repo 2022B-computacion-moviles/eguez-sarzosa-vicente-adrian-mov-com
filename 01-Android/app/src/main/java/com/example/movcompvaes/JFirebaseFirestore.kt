@@ -5,8 +5,10 @@ import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.ListView
+import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.QueryDocumentSnapshot
+import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import java.util.*
@@ -53,7 +55,65 @@ class JFirebaseFirestore : AppCompatActivity() {
 
         val botonFirebaseEliminar = findViewById<Button>(R.id.btn_fs_eliminar)
         botonFirebaseEliminar.setOnClickListener { eliminarRegistro() }
+
+        val botonFirebaseEmpezarPaginar = findViewById<Button>(R.id.btn_fs_epaginar)
+        botonFirebaseEmpezarPaginar.setOnClickListener { query = null; consultarCiudades(adaptador); }
+        val botonFirebasePaginar = findViewById<Button>(R.id.btn_fs_paginar)
+        botonFirebasePaginar.setOnClickListener {
+            consultarCiudades(adaptador)
+        }
     }
+
+    fun consultarCiudades(
+        adaptador: ArrayAdapter<JCitiesDto>
+    ){
+        val db = Firebase.firestore
+        val citiesRef = db.collection("cities")
+            .orderBy("population").limit(1)
+        var tarea: Task<QuerySnapshot>? = null
+        if (query == null) {
+            tarea = citiesRef.get() // 1era vez
+            limpiarArreglo()
+            adaptador.notifyDataSetChanged()
+        } else {
+            tarea = query!!.get()
+        // consulta de la consulta anterior
+        // empezando en el nuevo documento
+        }
+
+
+
+
+
+        if (tarea != null) {
+            tarea
+                .addOnSuccessListener { documentSnapshots ->
+                    guardarQuery(documentSnapshots, citiesRef)
+                    for (ciudad in documentSnapshots) {
+                        anadirAArregloCiudad(arreglo,
+                            ciudad,
+                            adaptador)
+                    }
+                    adaptador.notifyDataSetChanged()
+                }
+                .addOnFailureListener {
+                    // si hay fallos
+                }
+        }
+    }
+    fun guardarQuery(documentSnapshots: QuerySnapshot,
+                     refCities: Query){}
+
+
+
+    // [1,2,3,4,5,6,7]
+    // 4 primeros [1,2,3,4]
+    // [1,3,5,6,7,10,12]
+    // 4 primeros [1,3,5,6]
+    // [1,3,5,6,7,10,12]
+    // 4 primeros   X => [1,3,5,6] (cargar mas)
+    // 4 siguientes 6 =>  [7,10,12] (cargar mas)
+    // 4 primeros   12 => []
 
     fun eliminarRegistro(){
         val db = Firebase.firestore
